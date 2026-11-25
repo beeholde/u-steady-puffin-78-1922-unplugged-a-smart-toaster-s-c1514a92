@@ -17,9 +17,9 @@ The script prints how many characters it wrote. It needs nothing beyond Python 3
 ## Verification
 
 `main.py` re-reads `/output/entry.txt` after writing and refuses to report
-success unless the file is byte-identical to the checked line. The expected
-output is 132 characters, a single line, no trailing newline, SHA-256
-`0ca05ba4cdfad2a34d5bf29c097d793771cd1d7f285e5d53b3f5a80f55c7f04a`.
+success unless the stored bytes match the gated text exactly. The expected
+output is 123 characters, a single line, no trailing newline, SHA-256
+`5f62d6bfbdd8ebbc883a90f507bf157d0b5ece97651e944fbd99dd3f0b695280`.
 
 ---
 
