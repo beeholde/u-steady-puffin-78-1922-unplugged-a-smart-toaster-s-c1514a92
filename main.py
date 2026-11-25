@@ -26,6 +26,12 @@ def check_line(text):
         raise ValueError("the line is empty")
     if "\n" in stripped or "\r" in stripped:
         raise ValueError("the line must stay on one line")
+    if any(ord(ch) < 0x20 for ch in stripped):
+        raise ValueError("the line must not contain control characters")
+    try:
+        stripped.encode("utf-8")
+    except UnicodeEncodeError as exc:
+        raise ValueError("the line must be plain UTF-8 text") from exc
     if len(stripped) > LIMIT:
         raise ValueError(
             "the line is %d characters, over the %d limit"
@@ -39,6 +45,12 @@ def main():
     os.makedirs(os.path.dirname(TARGET), exist_ok=True)
     with open(TARGET, "w", encoding="utf-8", newline="") as handle:
         handle.write(ready)
+    # Read back what landed on disk: the entry must be byte-identical
+    # to the checked line, one line, no trailing newline.
+    with open(TARGET, "r", encoding="utf-8", newline="") as handle:
+        written = handle.read()
+    if written != ready:
+        raise ValueError("the written entry does not match the checked line")
     print("wrote %d characters to %s" % (len(ready), TARGET))
 
 

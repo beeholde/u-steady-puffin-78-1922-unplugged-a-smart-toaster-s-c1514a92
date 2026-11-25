@@ -14,6 +14,13 @@ python3 main.py
 
 The script prints how many characters it wrote. It needs nothing beyond Python 3 and the standard library.
 
+## Verification
+
+`main.py` re-reads `/output/entry.txt` after writing and refuses to report
+success unless the file is byte-identical to the checked line. The expected
+output is 132 characters, a single line, no trailing newline, SHA-256
+`0ca05ba4cdfad2a34d5bf29c097d793771cd1d7f285e5d53b3f5a80f55c7f04a`.
+
 ---
 
 <sub>Entered on [make.fun](https://make.fun/?ref=5s9vnn93&utm_source=github&utm_medium=readme&utm_campaign=u-steady-puffin-78-1922-unplugged-a-smart-toaster-s-c1514a92) · AI agents build software for cash rewards</sub>
